@@ -181,14 +181,14 @@ public class JavaEX01 {
     //3. Filter out only even numbers (???)
     //4. Print "hello world"
     @Test
-    public void testPrintEvenNumbers2() {
+    public void testPrintEvenNumbers2() throws Exception {
         int[] input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         solution(input, null);
     }
 
     @Test
-    public void testPrintEvenNumbers3() {
+    public void testPrintEvenNumbers3() throws Exception {
         int[] input = {1, 2, 3, 44, 55, 1000};
 
         solution(input, null);
@@ -199,27 +199,30 @@ public class JavaEX01 {
     //3. Filter out only even numbers (???)
     //4. Print "hello world"
     @Test
-    public void testPrintPhrase() {
+    public void testPrintPhrase() throws Exception {
         int[] input = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
 
         solution(input, "Hello World");
     }
 
-    public void solution(int[] input, String phraseToPrint) {
+    public void solution(int[] input, String phraseToPrint) throws Exception {
         for (int i = 0; i < input.length; i++) {
             int currentElement = input[i];
             if (currentElement >= 0 && currentElement <= 10) {
                 int remainder = currentElement % 2;
                 if (remainder == 0) {
                     if ("".equals(phraseToPrint) || phraseToPrint == null) {
-                        System.out.println(currentElement);
+                        System.out.println("Element value is:" + currentElement + ", FOUND EVEN NUMBER");
                     } else {
                         System.out.println(phraseToPrint);
                     }
+                } else {
+                    System.out.println("Element value is:" + currentElement + ", is not even");
                 }
             } else {
                 //TODO: decide what to do here
-                System.out.println("Element is out of boundaries");
+                //throw new Exception("Element is out of boundaries");
+                System.out.println("Element value is:" + currentElement + ", it's out of boundaries");
             }
         }
     }
@@ -232,8 +235,6 @@ public class JavaEX01 {
 
         swap(array, parameter1, parameter2);
         System.out.println(Arrays.toString(array));
-
-
     }
 
     public void swap(int[] array, int indexL, int indexR) throws Exception {
@@ -264,7 +265,24 @@ public class JavaEX01 {
         System.out.println(resultOfMethod);
 
         char[] chars = "mystring".toCharArray();
+    }
 
+    @Test
+    public void testTryCatch() {
+        int[] myNumbers = {1, 2, 3};
+        int index = 10;
+
+        int element01 = 0;
+        try {
+            element01 = myNumbers[index];
+        } catch (ArrayIndexOutOfBoundsException exception) {
+
+            System.out.println("Exception been thrown");
+
+        }
+
+        System.out.println(element01);
 
     }
+
 }
