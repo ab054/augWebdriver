@@ -29,4 +29,8 @@ public class Phone {
     public void sendMessage() {
         System.out.println("Message sent...");
     }
+
+    public String getModel() {
+        return model;
+    }
 }
