@@ -8,10 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public class BaseTest {
 
@@ -19,8 +16,12 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeTest
-    public void setup(String browserType) {
+    public void setup(@Optional String browserType) {
         String osName = System.getProperty("os.name");
+
+        if (browserType == null) {
+            browserType = "Chrome";
+        }
 
         if (osName.equalsIgnoreCase("Mac OS X")) {
             System.setProperty("webdriver.gecko.driver", "src/test/resources/drivers/macOS/gecko/geckodriver");
@@ -41,10 +42,6 @@ public class BaseTest {
         }
     }
 
-    @AfterMethod
-    public void finishTest() {
-        driver.quit();
-    }
 
     @AfterSuite
     public void afterSuite() {

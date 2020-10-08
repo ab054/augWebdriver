@@ -1,6 +1,7 @@
 package tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.ResultsPage;
@@ -43,10 +44,18 @@ public class GoogleSearchTest extends BaseTest {
         Assert.assertTrue(statsVisible);
     }
 
+    @DataProvider(name = "test1")
+    public Object[][] createData1() {
+        return new Object[][]{
+                {"Portnov Computer"},
+                {"Portnov Computer School"},
+        };
+    }
 
-    @Test
-    public void test_SearchWithParameter() {
-        String queryForSearch = "Portnov Computer";
+
+    @Test(dataProvider = "test1")
+    public void test_SearchWithParameter(String dataProviderValue) {
+        String queryForSearch = dataProviderValue;
 
         MainPage mainPage = new MainPage(driver);
         mainPage.open();
